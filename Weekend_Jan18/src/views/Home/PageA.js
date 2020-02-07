@@ -1,0 +1,29 @@
+import { createAppContainer } from "react-navigation"
+import { createStackNavigator } from "react-navigation-stack";;
+
+import Main from "./PageA/Main";
+import Secondary from "./PageA/Secondary";
+
+const PageANavigator = createStackNavigator({
+  Main: {
+    navigationOptions: {
+      header: null
+    },
+    screen: Main
+  },
+
+  Secondary: {
+    navigationOptions: {
+      header: null
+    },
+    screen: Secondary
+  }
+});
+
+PageANavigator.navigationOptions = ({ navigation }) => ({
+  tabBarVisible: navigation.state.index === 0,
+  swipeEnabled: navigation.state.index === 0
+});
+
+const app=createAppContainer(PageANavigator)
+export default app;

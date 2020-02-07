@@ -1,0 +1,20 @@
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+
+
+import { DrawerItems } from "react-navigation-drawer";
+
+import styles from "./styles";
+
+const CustomDrawerNavigator = props => (
+  <View style={[styles.container]}>
+    <DrawerItems
+      activeBackgroundColor={"black"}
+      activeTintColor={"white"}
+      iconContainerStyle={styles.icons}
+      {...props}
+    />
+  </View>
+);
+
+export default CustomDrawerNavigator;

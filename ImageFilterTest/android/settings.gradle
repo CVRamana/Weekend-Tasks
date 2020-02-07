@@ -1,0 +1,5 @@
+rootProject.name = 'ImageFilterTest'
+include ':react-native-image-filter'
+project(':react-native-image-filter').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-filter/android')
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
