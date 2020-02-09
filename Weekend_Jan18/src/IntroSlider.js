@@ -79,7 +79,6 @@ backgroundColor:"grey"
           title="Example2"
           onPress={() => this.props.navigation.navigate('IntroSlider')}
         />
-
     </View>
 </View>
       ) 
