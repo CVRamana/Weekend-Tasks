@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="2"
+    tools:context=".MainActivity">
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_weight="0.4"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+<Button
+    android:layout_weight="1.6"
+    android:onClick="myClick"
+    android:text="hello world"
+    android:height="50dp"
+    android:width="200dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+
+
+
+</LinearLayout>

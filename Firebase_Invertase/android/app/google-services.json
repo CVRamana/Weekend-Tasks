@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "541847649043",
+    "firebase_url": "https://fir-invertase.firebaseio.com",
+    "project_id": "fir-invertase",
+    "storage_bucket": "fir-invertase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541847649043:android:d5195a416ba14128f138e6",
+        "android_client_info": {
+          "package_name": "com.firebase_invertase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541847649043-27ngb1gua7k0elbs0lhu8bvoc5vnvcbd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMGx4kKSMghxhuEyDo7laF5ldVIbZiTlc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541847649043-27ngb1gua7k0elbs0lhu8bvoc5vnvcbd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "541847649043-js49nlivre9d6v8v8s7ec7alsrcct1dq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Firebase-Invertase"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

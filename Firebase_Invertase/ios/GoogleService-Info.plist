@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>541847649043-js49nlivre9d6v8v8s7ec7alsrcct1dq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.541847649043-js49nlivre9d6v8v8s7ec7alsrcct1dq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCXOi92-RaCgPd33XMCfy1abyIilqCsk5c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>541847649043</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.Firebase-Invertase</string>
+	<key>PROJECT_ID</key>
+	<string>fir-invertase</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fir-invertase.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:541847649043:ios:797b5203fef8e852f138e6</string>
+	<key>DATABASE_URL</key>
+	<string>https://fir-invertase.firebaseio.com</string>
+</dict>
+</plist>
