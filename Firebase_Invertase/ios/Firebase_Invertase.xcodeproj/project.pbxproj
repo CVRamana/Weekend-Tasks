@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* Firebase_InvertaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* Firebase_InvertaseTests.m */; };
+		0C4F319E23F5AAFD002EA43B /* FaceDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4F319D23F5AAFD002EA43B /* FaceDetection.swift */; };
+		0C4F31A023F5AB18002EA43B /* FaceDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4F319F23F5AB17002EA43B /* FaceDetection.m */; };
+		0C4F31AA23F5B458002EA43B /* barcode_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F31A223F5B458002EA43B /* barcode_128.png */; };
+		0C4F31AB23F5B458002EA43B /* automl_labeler_model.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F31A323F5B458002EA43B /* automl_labeler_model.tflite */; };
+		0C4F31AC23F5B458002EA43B /* image_has_text.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F31A423F5B458002EA43B /* image_has_text.jpg */; };
+		0C4F31AD23F5B458002EA43B /* beach.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F31A523F5B458002EA43B /* beach.jpg */; };
+		0C4F31AE23F5B458002EA43B /* automl_labeler_manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F31A623F5B458002EA43B /* automl_labeler_manifest.json */; };
+		0C4F31AF23F5B458002EA43B /* qr_code.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F31A723F5B458002EA43B /* qr_code.jpg */; };
+		0C4F31B023F5B458002EA43B /* automl_labeler_labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F31A823F5B458002EA43B /* automl_labeler_labels.txt */; };
+		0C4F31B123F5B458002EA43B /* grace_hopper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C4F31A923F5B458002EA43B /* grace_hopper.jpg */; };
+		0C4F31B323F5B712002EA43B /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4F31B223F5B712002EA43B /* UIUtilities.swift */; };
 		0C54B68C23F3BF85003E448B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C54B68B23F3BF85003E448B /* GoogleService-Info.plist */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
@@ -46,6 +57,18 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* Firebase_InvertaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Firebase_InvertaseTests.m; sourceTree = "<group>"; };
 		05807AB471C4D5663BFA7E2D /* Pods-Firebase_Invertase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Firebase_Invertase.release.xcconfig"; path = "Target Support Files/Pods-Firebase_Invertase/Pods-Firebase_Invertase.release.xcconfig"; sourceTree = "<group>"; };
+		0C4F319C23F5AAFD002EA43B /* Firebase_Invertase-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Firebase_Invertase-Bridging-Header.h"; sourceTree = "<group>"; };
+		0C4F319D23F5AAFD002EA43B /* FaceDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetection.swift; sourceTree = "<group>"; };
+		0C4F319F23F5AB17002EA43B /* FaceDetection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceDetection.m; sourceTree = "<group>"; };
+		0C4F31A223F5B458002EA43B /* barcode_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barcode_128.png; sourceTree = "<group>"; };
+		0C4F31A323F5B458002EA43B /* automl_labeler_model.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = automl_labeler_model.tflite; sourceTree = "<group>"; };
+		0C4F31A423F5B458002EA43B /* image_has_text.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_has_text.jpg; sourceTree = "<group>"; };
+		0C4F31A523F5B458002EA43B /* beach.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = beach.jpg; sourceTree = "<group>"; };
+		0C4F31A623F5B458002EA43B /* automl_labeler_manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = automl_labeler_manifest.json; sourceTree = "<group>"; };
+		0C4F31A723F5B458002EA43B /* qr_code.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qr_code.jpg; sourceTree = "<group>"; };
+		0C4F31A823F5B458002EA43B /* automl_labeler_labels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = automl_labeler_labels.txt; sourceTree = "<group>"; };
+		0C4F31A923F5B458002EA43B /* grace_hopper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grace_hopper.jpg; sourceTree = "<group>"; };
+		0C4F31B223F5B712002EA43B /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		0C54B68B23F3BF85003E448B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Firebase_Invertase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Firebase_Invertase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Firebase_Invertase/AppDelegate.h; sourceTree = "<group>"; };
@@ -124,12 +147,40 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0C4F319B23F5AAC3002EA43B /* NativeMlKit */ = {
+			isa = PBXGroup;
+			children = (
+				0C4F319D23F5AAFD002EA43B /* FaceDetection.swift */,
+				0C4F31B223F5B712002EA43B /* UIUtilities.swift */,
+				0C4F319F23F5AB17002EA43B /* FaceDetection.m */,
+				0C4F319C23F5AAFD002EA43B /* Firebase_Invertase-Bridging-Header.h */,
+			);
+			name = NativeMlKit;
+			sourceTree = "<group>";
+		};
+		0C4F31A123F5B458002EA43B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0C4F31A223F5B458002EA43B /* barcode_128.png */,
+				0C4F31A323F5B458002EA43B /* automl_labeler_model.tflite */,
+				0C4F31A423F5B458002EA43B /* image_has_text.jpg */,
+				0C4F31A523F5B458002EA43B /* beach.jpg */,
+				0C4F31A623F5B458002EA43B /* automl_labeler_manifest.json */,
+				0C4F31A723F5B458002EA43B /* qr_code.jpg */,
+				0C4F31A823F5B458002EA43B /* automl_labeler_labels.txt */,
+				0C4F31A923F5B458002EA43B /* grace_hopper.jpg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* Firebase_Invertase */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				0C4F31A123F5B458002EA43B /* Resources */,
+				0C4F319B23F5AAC3002EA43B /* NativeMlKit */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				0C54B68B23F3BF85003E448B /* GoogleService-Info.plist */,
@@ -296,6 +347,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1030;
+					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
@@ -341,8 +395,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C4F31AA23F5B458002EA43B /* barcode_128.png in Resources */,
+				0C4F31AC23F5B458002EA43B /* image_has_text.jpg in Resources */,
+				0C4F31AE23F5B458002EA43B /* automl_labeler_manifest.json in Resources */,
 				0C54B68C23F3BF85003E448B /* GoogleService-Info.plist in Resources */,
+				0C4F31AB23F5B458002EA43B /* automl_labeler_model.tflite in Resources */,
+				0C4F31B123F5B458002EA43B /* grace_hopper.jpg in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				0C4F31AF23F5B458002EA43B /* qr_code.jpg in Resources */,
+				0C4F31B023F5B458002EA43B /* automl_labeler_labels.txt in Resources */,
+				0C4F31AD23F5B458002EA43B /* beach.jpg in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,11 +538,15 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Firebase_Invertase/Pods-Firebase_Invertase-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseMLVisionFaceModel/GoogleMVFaceDetectorResources.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseMLVisionTextModel/GoogleMVTextDetectorResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
 				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMVFaceDetectorResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMVTextDetectorResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RSKImageCropperStrings.bundle",
 			);
@@ -564,8 +630,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C4F31A023F5AB18002EA43B /* FaceDetection.m in Sources */,
+				0C4F319E23F5AAFD002EA43B /* FaceDetection.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				0C4F31B323F5B712002EA43B /* UIUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +687,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3D62A5526171B50AF43B0092 /* Pods-Firebase_InvertaseTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -641,6 +711,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2D49F1E864D22C9D431AD796 /* Pods-Firebase_InvertaseTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = Firebase_InvertaseTests/Info.plist;
@@ -662,6 +733,7 @@
 			baseConfigurationReference = D29B8E6DDB4570393BF74DB3 /* Pods-Firebase_Invertase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = Firebase_Invertase/Info.plist;
@@ -673,6 +745,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Firebase_Invertase;
+				SWIFT_OBJC_BRIDGING_HEADER = "Firebase_Invertase-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -682,6 +757,7 @@
 			baseConfigurationReference = 05807AB471C4D5663BFA7E2D /* Pods-Firebase_Invertase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = Firebase_Invertase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -692,6 +768,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Firebase_Invertase;
+				SWIFT_OBJC_BRIDGING_HEADER = "Firebase_Invertase-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

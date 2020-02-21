@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Image } from 'react-native';
+import { View, Text, NativeModules, Button, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 
 import vision from '@react-native-firebase/ml-vision';
 import { firebase } from '@react-native-firebase/ml-vision';
 import { utils } from '@react-native-firebase/app';
-// import firebase from '@react-native-firebase/app';
-// import firebase from '@react-native-firebase/storage';
 import storage from '@react-native-firebase/storage';
 import ImagePicker from 'react-native-image-crop-picker';
-
+const { FaceDetection } = NativeModules
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profileUrl: ''
+      profileUrl: '',
+      devicePath: "",
+      croppedImg: [],
+      calls: ["Detect Text", "Detect Face", "Label Image", "DetectnTrack", "Scan", "Delete Folder"]
     };
   }
   chooseImage = () => {
@@ -29,24 +30,13 @@ class App extends Component {
   }
 
   processImage = () => {
-    //Create a local file location in the documents directory of the device
-    // const localFile = `${utils().FilePath.DOCUMENT_DIRECTORY}/landmark.jpg`;
-
-    // const ref = await storage().ref('london-eye.jpg')
-    // ref.putFile("jgd")
-    //.writeToFile(localFile);
-
     vision().cloudLandmarkRecognizerProcessImage(this.state.devicePath).then((response) => {
       debugger
-      console.log('Landmark: ', response.landmark);
+      //  console.log('Landmark: ', response.landmark);
     }).catch(e => {
       debugger
-      console.log('ee-->>', e);
+      // console.log('ee-->>', e);
     });
-    // processed.forEach((response) => {
-    //   console.log('Landmark: ', response.landmark);
-    //   console.log('Confidence: ', response.confidence);
-    // });
   }
 
   //storage
@@ -54,13 +44,13 @@ class App extends Component {
   saveToCloud = async (path) => {
     //debugger
     const ref = await firebase.storage().ref("theImage").child("hfjg")
-   // debugger
+    // debugger
     const uploadtask = ref.putFile(path)
     uploadtask.then((snap) => {
       //debugger
       ref.getDownloadURL().then((data) => {
         debugger
-        console.warn(" profile image url=>", data)
+        //   console.warn(" profile image url=>", data)
 
         this.setState({
           // ProfileImageStatus: false,
@@ -69,6 +59,58 @@ class App extends Component {
 
       })
     })
+  }
+  deleteIt = () => {
+    FaceDetection.deleteFolder((res) => {
+      console.warn(res);
+      //filter the array
+      this.setState({croppedImg:[]})
+
+    })
+  }
+
+  //native ios methods
+  detectFace = () => {
+    if (this.state.devicePath === "") {
+      alert("empty image ")
+      return
+    }
+    FaceDetection.fun_withArg(this.state.devicePath, 2, (res) => {
+      console.warn(" callback from the ios: ", res)
+      this.setState({ croppedImg: res })
+    })
+  }
+  //handle the call method
+  handleCall = ({ item, index }) => {
+    //let n={}
+    let num = Number(index) + 1
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          if (this.state.devicePath === "") {
+            console.warn("empty image ydg", num)
+            return
+          }
+if(num != 6 ){
+          FaceDetection.getMlKit(this.state.devicePath, num, (res) => {
+            console.warn(" callback from the ios: ", res)
+            this.setState({ croppedImg: res })
+          })
+        }else{
+          FaceDetection.deleteFolder((res) => {
+            console.warn(res);
+            //filter the array
+            this.setState({croppedImg:[]})
+          })
+        }
+
+        }
+      }
+        style={styles.btn}>
+        <Text>{item}{num}</Text>
+
+      </TouchableOpacity>
+    )
 
   }
 
@@ -76,7 +118,10 @@ class App extends Component {
     return (
       <View style={{
         flex: 1,
-        marginTop: 100,
+        paddingTop: 100,
+        alignItems: "center",
+        // justifyContent:"center",
+        flexDirection: "column",
         backgroundColor: "pink"
       }}>
         <Text> App </Text>
@@ -88,14 +133,62 @@ class App extends Component {
           title="Choose Image"
           onPress={() => this.chooseImage()}
         />
+        <Button
+          title="Detect_Face"
+          onPress={() => this.detectFace()}
+        />
+        <Button
+          title="Delete Folder"
+          onPress={() => this.deleteIt()
+          }
+        />
         <Image
           source={{ uri: this.state.profileUrl }}
-          style={{ height: 100, width: 100 }}
+          style={{ height: 100, width: 100, backgroundColor: "grey" }}
+          resizeMethod={"resize"}
+          resizeMode="cover"
         />
+        <View style={{ backgroundColor: "green", height: 100, width: "100%" }}>
+          <FlatList
+            data={this.state.croppedImg}
+            horizontal={true}
+            renderItem={({ item }) => {
+              return (
+                <View style={{ margin: 10 }}>
+                  <Image
+                    source={{ uri: item }}
+                    style={{ height: 100, width: 100, backgroundColor: "red" }}
+                    resizeMethod={"resize"}
+                    resizeMode="cover"
+                  />
+                </View>
+              )
+            }}
+          />
+        </View>
+
+        <View
+          style={{ backgroundColor: "red", height: 50, width: "100%" }}>
+          <FlatList
+            data={this.state.calls}
+            horizontal={true}
+            renderItem={({ item, index }) => this.handleCall({ item, index })}
+          />
+        </View>
       </View>
 
     );
   }
 }
 
+const styles = StyleSheet.create({
+  btn: {
+    backgroundColor: "grey",
+    marginLeft: 10,
+    height: 50,
+    width: 120,
+    justifyContent: "center",
+    alignItems: "center"
+  }
+})
 export default App;
