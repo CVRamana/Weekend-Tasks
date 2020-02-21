@@ -7,6 +7,8 @@ import { utils } from '@react-native-firebase/app';
 import storage from '@react-native-firebase/storage';
 import ImagePicker from 'react-native-image-crop-picker';
 const { FaceDetection } = NativeModules
+import FaceDetectorAndroid from "./src/FaceDetectionAndroid";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -60,11 +62,22 @@ class App extends Component {
       })
     })
   }
+  //call Android method
+  callAndroid = () => {
+    FaceDetectorAndroid.detectFace(this.state.devicePath, (res) => {
+      console.warn("res from the android: ",res[1]);
+     // (res)
+    }, (err) => {
+      console.warn(err);
+    })
+
+  }
+
   deleteIt = () => {
     FaceDetection.deleteFolder((res) => {
       console.warn(res);
       //filter the array
-      this.setState({croppedImg:[]})
+      this.setState({ croppedImg: [] })
 
     })
   }
@@ -91,21 +104,21 @@ class App extends Component {
             console.warn("empty image ydg", num)
             return
           }
-if(num != 6 ){
-          FaceDetection.getMlKit(this.state.devicePath, num, (res) => {
-            console.warn(" callback from the ios: ", res)
-            this.setState({ croppedImg: res })
-          })
-        }else{
-          FaceDetection.deleteFolder((res) => {
-            console.warn(res);
-            //filter the array
-            this.setState({croppedImg:[]})
-          })
-        }
+          if (num != 6) {
+            FaceDetection.getMlKit(this.state.devicePath, num, (res) => {
+              console.warn(" callback from the ios: ", res)
+              this.setState({ croppedImg: res })
+            })
+          } else {
+            FaceDetection.deleteFolder((res) => {
+              console.warn(res);
+              //filter the array
+              this.setState({ croppedImg: [] })
+            })
+          }
 
         }
-      }
+        }
         style={styles.btn}>
         <Text>{item}{num}</Text>
 
@@ -140,6 +153,11 @@ if(num != 6 ){
         <Button
           title="Delete Folder"
           onPress={() => this.deleteIt()
+          }
+        />
+        <Button
+          title="Call ANdroid"
+          onPress={() => this.callAndroid()
           }
         />
         <Image
