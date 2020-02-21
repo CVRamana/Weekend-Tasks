@@ -34,7 +34,8 @@ class ImageFilter_Reboot: NSObject {
   func DeleteCoockiesForInstaLogout() -> Void {
     let cookie = HTTPCookie.self
     let cookieJar = HTTPCookieStorage.shared
-    for cookie in cookieJar.cookies! {
+    for cookie in cookieJar.cookies!
+    {
       cookieJar.deleteCookie(cookie)
     }
   }
@@ -175,7 +176,6 @@ class ImageFilter_Reboot: NSObject {
       }
       catch {
         print("Not able to load image")
-        
       }
       
     }

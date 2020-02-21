@@ -162,6 +162,10 @@ alert("success from android"+res + " "+a+" "+b+" "+c )
           style={{ height: 100, width: 100 }}
         />
 
+         <Image
+          source={{ uri: this.state.croppedPath }}
+          style={{ height: 100, width: 100,backgroundColor:"red" }}
+        />
 
       </View>
     );

@@ -13,9 +13,8 @@
 @interface
 RCT_EXTERN_MODULE(ImageFilter_Reboot,NSObject)
 RCT_EXTERN_METHOD(download:(NSString*)fileUrl
-                                                      
-                                                      fillterType:(NSInteger *)fillterType
-                                                      callback:(RCTResponseSenderBlock))
+fillterType:(NSInteger *)fillterType
+callback:(RCTResponseSenderBlock))
 
 RCT_EXTERN_METHOD(deleteFolder:(NSString*)fileUrl)
 @end
