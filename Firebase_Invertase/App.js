@@ -16,6 +16,7 @@ class App extends Component {
       profileUrl: '',
       devicePath: "",
       croppedImg: [],
+      androidUrls:[],
       calls: ["Detect Text", "Detect Face", "Label Image", "DetectnTrack", "Scan", "Delete Folder"]
     };
   }
@@ -62,15 +63,21 @@ class App extends Component {
       })
     })
   }
+
   //call Android method
   callAndroid = () => {
     FaceDetectorAndroid.detectFace(this.state.devicePath, (res) => {
-      console.warn("res from the android: ",res[1]);
-     // (res)
+      console.warn("res from the android: ", res[0], res[1], res[3]);
+      this.setState({ AndroidUrls: res })
     }, (err) => {
       console.warn(err);
     })
-
+  }
+  //delete file in android
+  deleteAndroidFiles = () => {
+    FaceDetectorAndroid.deleteFile((res) => {
+      console.warn(res);
+    }, () => { })
   }
 
   deleteIt = () => {
@@ -78,7 +85,6 @@ class App extends Component {
       console.warn(res);
       //filter the array
       this.setState({ croppedImg: [] })
-
     })
   }
 
@@ -116,32 +122,29 @@ class App extends Component {
               this.setState({ croppedImg: [] })
             })
           }
-
         }
         }
         style={styles.btn}>
         <Text>{item}{num}</Text>
-
       </TouchableOpacity>
     )
-
   }
 
   render() {
     return (
       <View style={{
         flex: 1,
-        paddingTop: 100,
+        //paddingTop: 100,
         alignItems: "center",
         // justifyContent:"center",
         flexDirection: "column",
         backgroundColor: "pink"
       }}>
         <Text> App </Text>
-        <Button
+        {/* <Button
           title="Landmark_ML"
           onPress={() => this.processImage()}
-        />
+        /> */}
         <Button
           title="Choose Image"
           onPress={() => this.chooseImage()}
@@ -160,12 +163,27 @@ class App extends Component {
           onPress={() => this.callAndroid()
           }
         />
-        <Image
-          source={{ uri: this.state.profileUrl }}
-          style={{ height: 100, width: 100, backgroundColor: "grey" }}
-          resizeMethod={"resize"}
-          resizeMode="cover"
-        />
+        {/* <Button
+          title="DeleteAndroidFiles"
+          onPress={() => this.deleteAndroidFiles()
+          }
+        /> */}
+        <View style={{ flexDirection: "row" }}>
+          <Image
+            source={{ uri: this.state.profileUrl }}
+            style={{ height: 100, width: 100, backgroundColor: "grey" }}
+            resizeMethod={"resize"}
+            resizeMode={"stretch"}
+          />
+          <Image
+            resizeMethod={"resize"}
+            resizeMode={"contain"}
+            source={{ uri: this.state.AndroidUrl }}
+            style={{ height: 200, width: 200, backgroundColor: "lightGrey" }}
+            resizeMethod={"resize"}
+            resizeMode="cover"
+          />
+        </View>
         <View style={{ backgroundColor: "green", height: 100, width: "100%" }}>
           <FlatList
             data={this.state.croppedImg}
@@ -193,6 +211,17 @@ class App extends Component {
             renderItem={({ item, index }) => this.handleCall({ item, index })}
           />
         </View>
+
+        <View
+          style={styles.androidFilter }
+        >
+          <FlatList
+            data={this.state.calls}
+            horizontal={true}
+            renderItem={({ item, index }) => this.handleCall({ item, index })}
+          />
+        </View>
+
       </View>
 
     );
@@ -200,6 +229,7 @@ class App extends Component {
 }
 
 const styles = StyleSheet.create({
+
   btn: {
     backgroundColor: "grey",
     marginLeft: 10,
@@ -207,6 +237,14 @@ const styles = StyleSheet.create({
     width: 120,
     justifyContent: "center",
     alignItems: "center"
+  },
+
+ androidFilter: {
+    backgroundColor: "yellow",
+    marginTop:20,
+    height: 100,
+    width: 400
   }
+
 })
 export default App;

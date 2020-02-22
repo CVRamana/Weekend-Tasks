@@ -4,6 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
@@ -49,12 +53,10 @@ import java.util.List;
 public class FirebaseMLKit extends ReactContextBaseJavaModule  {
     List<String> aList = new ArrayList<String>();
 
-
     FirebaseMLKit(ReactApplicationContext context) {
         super(context);
        // reactContext = context;
     }
-
     // High-accuracy landmark detection and face classification
     FirebaseVisionFaceDetectorOptions highAccuracyOpts =
             new FirebaseVisionFaceDetectorOptions.Builder()
@@ -96,11 +98,10 @@ public class FirebaseMLKit extends ReactContextBaseJavaModule  {
                                         public void onSuccess(List<FirebaseVisionFace> faces) {
                                             // Task completed successfully
                                             // ...
-
                                             for (FirebaseVisionFace face : faces) {
                                                 Rect bounds = face.getBoundingBox();
 
-                                                FirebaseMLKit.this.cropImage(img,bounds);
+                                                FirebaseMLKit.this.cropImage32(img,bounds);
                                                 System.out.println("bound in android are : "+bounds);
                                                 float rotY = face.getHeadEulerAngleY();  // Head is rotated to the right rotY degrees
                                                 float rotZ = face.getHeadEulerAngleZ();
@@ -115,47 +116,109 @@ public class FirebaseMLKit extends ReactContextBaseJavaModule  {
                                             // ...
                                         }
                                     });
-
-
             parcelFileDescriptor.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    public void cropImage(Bitmap img,Rect rect){
-
-//  Be sure that there is at least 1px to slice.
-        assert(rect.left < rect.right && rect.top < rect.bottom);
-//  Create our resulting image (150--50),(75--25) = 200x100px
-        Bitmap resultBmp = Bitmap.createBitmap(rect.right-rect.left, rect.bottom-rect.top, Bitmap.Config.ARGB_8888);
-        new Canvas(resultBmp).drawBitmap(img, -rect.left, -rect.top, null);
-
-        //create a file to write bitmap data
+    public void cropImage22(Bitmap src,Rect rect){
+        Bitmap output = Bitmap.createBitmap(src.getWidth(), src.getHeight(),
+              //  Bitmap.Config.ARGB_8888
+                Bitmap.Config.ARGB_8888
+        );
+        Canvas canvas = new Canvas(output);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(0Xff000000);
+        Path path = new Path();
+        path.addRect(rect.left, rect.top, rect.right, rect.bottom, Path.Direction.CW);
+        canvas.drawPath(path, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(src, rect.left,rect.top, paint);
         try
         {
-        File f = new File(getCurrentActivity().getCacheDir(), Calendar.getInstance().getTimeInMillis() + ".png");
-        f.createNewFile();
+            File f = new File(getCurrentActivity().getCacheDir(), Calendar.getInstance().getTimeInMillis() + "raman"+".png");
+            f.createNewFile();
 
 //Convert bitmap to byte array
-        Bitmap bitmap = img;
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-        byte[] bitmapdata = bos.toByteArray();
+            Bitmap bitmap = output;
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0/*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
 
 //write the bytes in file
-        FileOutputStream fos = new FileOutputStream(f);
-        fos.write(bitmapdata);
-        fos.flush();
-        fos.close();
+            FileOutputStream fos = new FileOutputStream(f);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
 
-        aList.add(f.getPath());
+            aList.add(f.getPath());
             System.out.println("saved path : "+aList.toString());
         }
         catch (IOException e){
             e.printStackTrace();
         }
+      //  return output;
+    }
+
+
+    //testing
+    public void cropImage32(Bitmap src,Rect rect){
+       Bitmap dup = Bitmap.createBitmap(src);
+        Bitmap output = dup.copy(Bitmap.Config.ARGB_8888, true);
+        //Bitmap output = Bitmap.createScaledBitmap(src,src.getWidth(),src.getHeight(),true);
+        Rect dst= new Rect(0,0,src.getHeight(),src.getWidth());
+        Canvas canvas = new Canvas(output);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(0Xff000000);
+        Path path = new Path();
+        path.addRect(rect.left, rect.top, rect.right, rect.bottom, Path.Direction.CW);
+        canvas.drawPath(path, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        //canvas.drawBitmap(src, 0,0, paint);
+        canvas.drawBitmap(src,rect,dst,paint);
+
+        try
+        {
+            File f = new File(getCurrentActivity().getCacheDir(), Calendar.getInstance().getTimeInMillis() + "raman"+".png");
+            f.createNewFile();
+
+//Convert bitmap to byte array
+            Bitmap bitmap = output;
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 1/*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+
+//write the bytes in file
+            FileOutputStream fos = new FileOutputStream(f);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+            aList.add(f.getPath());
+            System.out.println("saved path : "+aList.toString());
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        //  return output;
+    }
+
+
+
+    @ReactMethod
+    public void deleteFile( Callback successCallback,Callback errorCallback){
+
+        for (String f: aList){
+            File file = new File( f);
+            boolean deleted = file.delete();
+            if(deleted==true){
+                aList.remove(f);
+                successCallback.invoke("success");
+            }else{
+                errorCallback.invoke("not deleted");
+            }
+        }
+
     }
 
     @ReactMethod
@@ -168,17 +231,13 @@ public class FirebaseMLKit extends ReactContextBaseJavaModule  {
            // converting the uriToBitmap
 
             this.uriToBitmap(u);
-
             //sending the array as callback
-
             WritableArray array = Arguments.fromList(aList);
             successCallback.invoke(array);
         }
         else{
         errorCallback.invoke("error occured");
         }
-
-
     }
 }
 
