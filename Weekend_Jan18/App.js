@@ -19,8 +19,9 @@ import RNModal from "./src/RNModal";
 import Twitter_anim from "./src/Twitter_anim";
 import Animations from "./src/Animations";
 import Mausi from "./src/Mausi";
-import MainApp from "./src/MainApp";
+// import MainApp from "./src/MainApp";
 import Drawer from "./src/Drawer";
+import Gestures from "./src/Gestures";
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -83,13 +84,13 @@ class App extends Component {
           title="Example_Modal"
           onPress={() => this.props.navigation.navigate('Modal1')}
         />
-         <Button
+        <Button
           style={styles.button}
           title="Twitter Animations"
           onPress={() => this.props.navigation.navigate('Twitter_anim')}
         />
 
-<Button
+        <Button
           style={styles.button}
           title="RNModal"
           onPress={() => this.props.navigation.navigate('RNModal')}
@@ -100,25 +101,35 @@ class App extends Component {
           title="Example2"
           onPress={() => this.props.navigation.navigate('IntroSlider')}
         />
+
         <Button
           style={styles.button}
           title="ScrollView"
           onPress={() => this.props.navigation.navigate('ScrollExample')}
         />
-         <Button
+
+        <Button
           style={styles.button}
           title="Animations"
           onPress={() => this.props.navigation.navigate('Animations')}
         />
+
         <Button
           style={styles.button}
           title="Shapes"
           onPress={() => this.props.navigation.navigate('Shapes')}
         />
+
         <Button
           style={styles.button}
           title="DrawerNavigation"
           onPress={() => this.props.navigation.navigate('Drawer')}
+        />
+
+        <Button
+          style={styles.button}
+          title="Gestures_Handlers"
+          onPress={() => this.props.navigation.navigate('Gestures')}
         />
 
         <View style={styles.buttonsContainer}>
@@ -137,7 +148,7 @@ class App extends Component {
             title="Bottom"
             onPress={() => this.changePosition("flex-end")}
           />
-            <Button
+          <Button
             style={styles.button}
             title="circle Anim"
             onPress={() => this.props.navigation.navigate('Mausi')}
@@ -174,21 +185,24 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   }
 });
-const AppNavigator = createStackNavigator({
-  App: { screen: App },
-  LayoutExample: { screen: LayoutExample },
-  IntroSlider: { screen: IntroSlider },
-  ScrollExample: { screen: ScrollExample },
-  Modal1: { screen: Modal1 },
-  Shapes:{screen:Shapes},
-  RNModal:{screen:RNModal},
-  Twitter_anim:{screen:Twitter_anim},
-  Animations:{screen:Animations},
-  Mausi:{screen:Mausi},
-  Drawer:{screen:Drawer}
-},
+const AppNavigator = createStackNavigator(
+  {
+    App: { screen: App },
+    LayoutExample: { screen: LayoutExample },
+    IntroSlider: { screen: IntroSlider },
+    ScrollExample: { screen: ScrollExample },
+    Modal1: { screen: Modal1 },
+    Shapes: { screen: Shapes },
+    RNModal: { screen: RNModal },
+    Twitter_anim: { screen: Twitter_anim },
+    Animations: { screen: Animations },
+    Mausi: { screen: Mausi },
+    Drawer: { screen: Drawer },
+    Gestures: { screen: Gestures },
+  },
   {
     initialRouteName: 'App',
-  });
+  }
+);
 
 export default createAppContainer(AppNavigator);
