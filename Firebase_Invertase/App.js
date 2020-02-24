@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, NativeModules, Button, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, NativeModules, Button, Image, StyleSheet, FlatList, TouchableOpacity,Platform } from 'react-native';
 
 import vision from '@react-native-firebase/ml-vision';
 import { firebase } from '@react-native-firebase/ml-vision';
+
 import { utils } from '@react-native-firebase/app';
 import storage from '@react-native-firebase/storage';
+
 import ImagePicker from 'react-native-image-crop-picker';
 const { FaceDetection } = NativeModules
 import FaceDetectorAndroid from "./src/FaceDetectionAndroid";
+// import { platform } from 'os';
 
 class App extends Component {
   constructor(props) {
@@ -20,6 +23,8 @@ class App extends Component {
       calls: ["Detect Text", "Detect Face", "Label Image", "DetectnTrack", "Scan", "Delete Folder"]
     };
   }
+
+
   chooseImage = () => {
     ImagePicker.openPicker({
       width: 300,
@@ -35,10 +40,8 @@ class App extends Component {
   processImage = () => {
     vision().cloudLandmarkRecognizerProcessImage(this.state.devicePath).then((response) => {
       debugger
-      //  console.log('Landmark: ', response.landmark);
     }).catch(e => {
       debugger
-      // console.log('ee-->>', e);
     });
   }
 
@@ -54,7 +57,6 @@ class App extends Component {
       ref.getDownloadURL().then((data) => {
         debugger
         //   console.warn(" profile image url=>", data)
-
         this.setState({
           // ProfileImageStatus: false,
           profileUrl: data
@@ -64,11 +66,25 @@ class App extends Component {
     })
   }
 
+  //based on the plateform
+ componentDidMount(){
+   console.warn(Platform.OS);
+   
+ }
+  
   //call Android method
   callAndroid = () => {
     FaceDetectorAndroid.detectFace(this.state.devicePath, (res) => {
-      console.warn("res from the android: ", res[0], res[1], res[3]);
-      this.setState({ AndroidUrls: res })
+      console.warn(res);
+      let pathsFromAndroid=[]
+      let path=''
+      for(i=0 ; i<res.length-1 ;i++){
+        path="file:///"+res[i]
+        pathsFromAndroid.push(path)
+      }
+  
+      this.setState({ androidUrls: pathsFromAndroid})
+
     }, (err) => {
       console.warn(err);
     })
@@ -77,7 +93,11 @@ class App extends Component {
   deleteAndroidFiles = () => {
     FaceDetectorAndroid.deleteFile((res) => {
       console.warn(res);
-    }, () => { })
+      this.setState({androidUrls:[]})
+    }, (eerr) => {
+      console.warn(eerr);
+      this.setState({androidUrls:[]})
+     })
   }
 
   deleteIt = () => {
@@ -94,6 +114,7 @@ class App extends Component {
       alert("empty image ")
       return
     }
+
     FaceDetection.fun_withArg(this.state.devicePath, 2, (res) => {
       console.warn(" callback from the ios: ", res)
       this.setState({ croppedImg: res })
@@ -118,7 +139,9 @@ class App extends Component {
           } else {
             FaceDetection.deleteFolder((res) => {
               console.warn(res);
+
               //filter the array
+
               this.setState({ croppedImg: [] })
             })
           }
@@ -163,11 +186,11 @@ class App extends Component {
           onPress={() => this.callAndroid()
           }
         />
-        {/* <Button
+        <Button
           title="DeleteAndroidFiles"
           onPress={() => this.deleteAndroidFiles()
           }
-        /> */}
+        />
         <View style={{ flexDirection: "row" }}>
           <Image
             source={{ uri: this.state.profileUrl }}
@@ -175,14 +198,7 @@ class App extends Component {
             resizeMethod={"resize"}
             resizeMode={"stretch"}
           />
-          <Image
-            resizeMethod={"resize"}
-            resizeMode={"contain"}
-            source={{ uri: this.state.AndroidUrl }}
-            style={{ height: 200, width: 200, backgroundColor: "lightGrey" }}
-            resizeMethod={"resize"}
-            resizeMode="cover"
-          />
+         
         </View>
         <View style={{ backgroundColor: "green", height: 100, width: "100%" }}>
           <FlatList
@@ -216,9 +232,16 @@ class App extends Component {
           style={styles.androidFilter }
         >
           <FlatList
-            data={this.state.calls}
+            data={this.state.androidUrls}
             horizontal={true}
-            renderItem={({ item, index }) => this.handleCall({ item, index })}
+            renderItem={({ item}) => {
+              return(
+                <Image
+                source={{uri:item}}
+                style={{height:100,width:100,marginLeft:10,backgroundColor:"pink"}}
+                />
+              )
+            }}
           />
         </View>
 
@@ -229,7 +252,6 @@ class App extends Component {
 }
 
 const styles = StyleSheet.create({
-
   btn: {
     backgroundColor: "grey",
     marginLeft: 10,
@@ -238,12 +260,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-
  androidFilter: {
     backgroundColor: "yellow",
     marginTop:20,
     height: 100,
-    width: 400
+    width: "100%"
   }
 
 })

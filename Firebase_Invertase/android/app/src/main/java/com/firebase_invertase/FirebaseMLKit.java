@@ -122,44 +122,6 @@ public class FirebaseMLKit extends ReactContextBaseJavaModule  {
         }
     }
 
-    public void cropImage22(Bitmap src,Rect rect){
-        Bitmap output = Bitmap.createBitmap(src.getWidth(), src.getHeight(),
-              //  Bitmap.Config.ARGB_8888
-                Bitmap.Config.ARGB_8888
-        );
-        Canvas canvas = new Canvas(output);
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(0Xff000000);
-        Path path = new Path();
-        path.addRect(rect.left, rect.top, rect.right, rect.bottom, Path.Direction.CW);
-        canvas.drawPath(path, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(src, rect.left,rect.top, paint);
-        try
-        {
-            File f = new File(getCurrentActivity().getCacheDir(), Calendar.getInstance().getTimeInMillis() + "raman"+".png");
-            f.createNewFile();
-
-//Convert bitmap to byte array
-            Bitmap bitmap = output;
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 0/*ignored for PNG*/, bos);
-            byte[] bitmapdata = bos.toByteArray();
-
-//write the bytes in file
-            FileOutputStream fos = new FileOutputStream(f);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-
-            aList.add(f.getPath());
-            System.out.println("saved path : "+aList.toString());
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-      //  return output;
-    }
 
 
     //testing
@@ -186,7 +148,7 @@ public class FirebaseMLKit extends ReactContextBaseJavaModule  {
 //Convert bitmap to byte array
             Bitmap bitmap = output;
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 1/*ignored for PNG*/, bos);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0/*ignored for PNG*/, bos);
             byte[] bitmapdata = bos.toByteArray();
 
 //write the bytes in file
@@ -204,21 +166,35 @@ public class FirebaseMLKit extends ReactContextBaseJavaModule  {
     }
 
 
-
     @ReactMethod
     public void deleteFile( Callback successCallback,Callback errorCallback){
-
+     Boolean flag=true;
+     Integer i=0;
         for (String f: aList){
-            File file = new File( f);
-            boolean deleted = file.delete();
-            if(deleted==true){
-                aList.remove(f);
-                successCallback.invoke("success");
-            }else{
-                errorCallback.invoke("not deleted");
-            }
-        }
 
+            Uri u=Uri.fromFile(new File(f));
+            File fdelete = new File(u.getPath());
+            if (fdelete.exists()) {
+                if (fdelete.delete()) {
+                    System.out.println("file Deleted :" + u.getPath());
+
+
+                } else {
+                    System.out.println("file not Deleted :" + u.getPath());
+
+                    flag=false;
+                }
+            }else {
+                System.out.println("file not found ");
+               // errorCallback.invoke("deletion failed ");
+                flag=false;
+            }
+            i++;
+        }
+        if(flag) {
+//            aList.removeAll();
+            successCallback.invoke(" Deletion Successfull ! ");
+        }else{errorCallback.invoke("Deletion Failed");}
     }
 
     @ReactMethod
